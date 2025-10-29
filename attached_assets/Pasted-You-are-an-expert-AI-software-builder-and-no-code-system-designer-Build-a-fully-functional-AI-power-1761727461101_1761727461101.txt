@@ -1,0 +1,101 @@
+You are an expert AI software builder and no-code system designer.
+Build a fully functional AI-powered web application that works right after download — no manual edits needed.
+The project should look and feel like a modern SaaS automation tool, built with no-code/low-code principles and AI integrations.
+
+⚙️ CORE REQUIREMENTS:
+
+Frontend:
+
+Use HTML + TailwindCSS + Alpine.js (or DaisyUI) for UI.
+
+Must be fully responsive (mobile, tablet, desktop).
+
+Include clean animations, hover effects, and an interactive dashboard layout.
+
+Add upload buttons, text boxes, and result display sections where needed.
+
+The design should resemble tools like Notion AI or ChatGPT UI — modern, minimal, elegant.
+
+Backend:
+
+Use Flask (Python) as the backend.
+
+Create REST API endpoints (like /process or /analyze) that handle input and return results.
+
+Integrate with any AI API (e.g., OpenAI, Hugging Face, or Gemini).
+
+Keep everything self-contained — no external DB required.
+
+Deployment:
+
+It must work perfectly when hosted on Netlify (frontend) and Render / Replit (backend).
+
+Include a clear README.md with all steps.
+
+App should run without modifying code — plug-and-play structure.
+
+AI Functionality (Pick one or customize):
+
+AI Resume Tailor (customizes resumes based on job descriptions)
+
+AI Email Generator (writes outreach or cold emails automatically)
+
+AI Social Media Post Generator (creates posts for LinkedIn/Instagram)
+
+PDF Data Extractor (reads & summarizes PDF content)
+
+AI Automation Tool (connects APIs like Google Sheets + Gmail + Slack)
+
+Essential UI Sections:
+
+Navbar: Project title + small tagline like “Powered by AI”
+
+Hero Section: Describe the purpose (“Automate your workflow with one click”)
+
+Main Action Panel: Inputs (file upload/text box/button)
+
+Results Panel: Display AI output dynamically
+
+Download/Copy Button: Export the output easily
+
+Footer: “Built by Swar | AI Automation Engineer”
+
+Visual Design & UX:
+
+Use modern typography (Poppins, Inter, or similar)
+
+Rounded cards, drop shadows, gradients
+
+Add a toggle for light/dark mode if possible
+
+Make the result appear with a fade animation
+
+Technical Requirements:
+
+Use .env for any API keys (and include .env.example)
+
+Folder structure should be clean:
+
+/frontend  
+  ├── index.html  
+  ├── styles.css  
+  └── scripts.js  
+/backend  
+  ├── app.py  
+  ├── requirements.txt  
+  └── templates/  
+
+
+Backend returns JSON responses (e.g., { "result": "AI generated text" })
+
+Frontend dynamically updates the output section without reloading.
+
+Final Deliverables:
+
+Fully working web app
+
+Clear README for deployment
+
+Tested to ensure it runs right after download
+
+Visuals should be professional enough to showcase in a freelancer portfolio
