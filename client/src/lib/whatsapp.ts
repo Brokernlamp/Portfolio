@@ -15,4 +15,12 @@ export function buildServiceInquiryMessage(serviceName: string): string {
   return `Hi! I'm interested in the service: ${serviceName}. Could you share pricing and timeline? ${pageUrl}`;
 }
 
+export function buildContactFormMessage(name: string, email: string, phone: string, businessType: string, message: string): string {
+  return `Hi! I'd like to get in touch.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nBusiness Type: ${businessType}\n\nMessage:\n${message}`;
+}
+
+export function buildFreeDemoMessage(serviceName: string): string {
+  return `Hi! I'm interested in a FREE DEMO for ${serviceName}. Please let me know when we can schedule it.`;
+}
+
 

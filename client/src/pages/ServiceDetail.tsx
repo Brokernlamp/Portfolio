@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, CheckCircle2, Code, DollarSign, Users } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { buildServiceInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
+import { buildServiceInquiryMessage, buildFreeDemoMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
 
 export default function ServiceDetail() {
   const [, params] = useRoute("/service/:id");
@@ -31,6 +31,13 @@ export default function ServiceDetail() {
   const openWhatsappForService = () => {
     if (!service) return;
     const msg = buildServiceInquiryMessage(service.name);
+    const url = buildWhatsAppUrl(msg);
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const openFreeDemo = () => {
+    if (!service) return;
+    const msg = buildFreeDemoMessage(service.name);
     const url = buildWhatsAppUrl(msg);
     window.open(url, "_blank", "noopener,noreferrer");
   };
@@ -132,6 +139,14 @@ export default function ServiceDetail() {
                   </Button>
                   <Button 
                     variant="outline" 
+                    className="w-full mb-3"
+                    onClick={openFreeDemo}
+                    data-testid="button-free-demo"
+                  >
+                    Free Demo
+                  </Button>
+                  <Button 
+                    variant="ghost" 
                     className="w-full"
                     onClick={openWhatsappForService}
                     data-testid="button-whatsapp"

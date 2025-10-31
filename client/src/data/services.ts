@@ -9,6 +9,7 @@ export interface ServiceData {
   businessTypes: BusinessType[];
   techStack: string[];
   features: string[];
+  imageUrl?: string;
 }
 
 export const servicesData: ServiceData[] = [

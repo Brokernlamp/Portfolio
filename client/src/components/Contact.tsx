@@ -2,10 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertContactSchema, type InsertContact } from "@shared/schema";
@@ -17,10 +14,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { buildContactFormMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
 
 export function Contact() {
-  const { toast } = useToast();
-
   const form = useForm<InsertContact>({
     resolver: zodResolver(insertContactSchema),
     defaultValues: {
@@ -32,28 +28,17 @@ export function Contact() {
     },
   });
 
-  const contactMutation = useMutation({
-    mutationFn: async (data: InsertContact) => {
-      return await apiRequest("POST", "/api/contact", data);
-    },
-    onSuccess: () => {
-      toast({
-        title: "Message sent!",
-        description: "I'll get back to you within 24 hours.",
-      });
-      form.reset();
-    },
-    onError: () => {
-      toast({
-        title: "Failed to send message",
-        description: "Please try again or contact me directly via WhatsApp.",
-        variant: "destructive",
-      });
-    },
-  });
-
   const onSubmit = (data: InsertContact) => {
-    contactMutation.mutate(data);
+    const message = buildContactFormMessage(
+      data.name,
+      data.email || "Not provided",
+      data.phone || "Not provided",
+      data.businessType || "Not specified",
+      data.message
+    );
+    const url = buildWhatsAppUrl(message);
+    window.open(url, "_blank", "noopener,noreferrer");
+    form.reset();
   };
 
   return (
@@ -209,17 +194,10 @@ export function Contact() {
                 <Button 
                   type="submit" 
                   className="w-full" 
-                  disabled={contactMutation.isPending}
                   data-testid="button-submit-contact"
                 >
-                  {contactMutation.isPending ? (
-                    "Sending..."
-                  ) : (
-                    <>
-                      Send Message
-                      <Send className="ml-2 w-4 h-4" />
-                    </>
-                  )}
+                  <span>Send Message via WhatsApp</span>
+                  <Send className="ml-2 w-4 h-4" />
                 </Button>
               </form>
             </Form>
