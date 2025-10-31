@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, CheckCircle2, Code, DollarSign, Users } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { buildServiceInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
 
 export default function ServiceDetail() {
   const [, params] = useRoute("/service/:id");
@@ -27,8 +28,11 @@ export default function ServiceDetail() {
     );
   }
 
-  const scrollToContact = () => {
-    window.location.href = "/#contact";
+  const openWhatsappForService = () => {
+    if (!service) return;
+    const msg = buildServiceInquiryMessage(service.name);
+    const url = buildWhatsAppUrl(msg);
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const relatedServices = servicesData
@@ -121,20 +125,18 @@ export default function ServiceDetail() {
                   <Button 
                     className="w-full mb-3" 
                     size="lg"
-                    onClick={scrollToContact}
+                    onClick={openWhatsappForService}
                     data-testid="button-request-quote"
                   >
-                    Request Custom Quote
+                    Get Quote on WhatsApp
                   </Button>
                   <Button 
                     variant="outline" 
                     className="w-full"
-                    asChild
+                    onClick={openWhatsappForService}
                     data-testid="button-whatsapp"
                   >
-                    <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
-                      Chat on WhatsApp
-                    </a>
+                    Chat on WhatsApp
                   </Button>
                 </Card>
               </div>
